@@ -1,0 +1,99 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %}
+Address {% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+<section class="account-page section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 mx-auto">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <div class="card account-left">
+              <div class="user-profile-header">
+                <img alt="logo" src="/static/ehome/img/user.jpg" />
+                <h5 class="mb-1 text-secondary text-capitalize">
+                  <strong>Hi </strong>{{request.user}}
+                </h5>
+              </div>
+              <div class="list-group">
+                <a
+                  href="{% url 'profile' %}"
+                  class="list-group-item list-group-item-action"
+                  ><i aria-hidden="true" class="mdi mdi-account-outline"></i> My
+                  Profile</a
+                >
+                <a
+                  href="{% url 'address' %}"
+                  class="list-group-item list-group-item-action active"
+                  ><i aria-hidden="true" class="mdi mdi-map-marker-circle"></i>
+                  My Address</a
+                >
+                <a
+                  href="{% url 'wishlist' %}"
+                  class="list-group-item list-group-item-action"
+                  ><i aria-hidden="true" class="mdi mdi-heart-outline"></i> Wish
+                  List
+                </a>
+                <a
+                  href="{% url 'logout' %}"
+                  class="list-group-item list-group-item-action"
+                  ><i aria-hidden="true" class="mdi mdi-lock"></i> Logout</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              {% for ad in add %}
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3>Address {{forloop.counter}}</h3>
+                    <p>Name: {{ad.name}}</p>
+                    <p>Phone: {{ad.phone}}</p>
+                    <p>Email: {{ad.email}}</p>
+                    <p>Locality: {{ad.locality}}</p>
+                    <p>City: {{ad.city}}</p>
+                    <p>State: {{ad.state}}</p>
+                    <p>Zip Code: {{ad.zipcode}}</p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-white border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-truck-fast"></i>
+          <h6>Free & Next Day Delivery</h6>
+          <p>Lorem ipsum dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-basket"></i>
+          <h6>100% Satisfaction Guarantee</h6>
+          <p>Rorem Ipsum Dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-tag-heart"></i>
+          <h6>Great Daily Deals Discount</h6>
+          <p>Sorem Ipsum Dolor sit amet, Cons...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

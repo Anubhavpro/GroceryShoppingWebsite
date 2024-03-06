@@ -1,0 +1,195 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %}
+{{product.product_title}} {% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+<section class="pt-3 pb-3 page-info section-padding border-bottom bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="#"
+          ><strong><span class="mdi mdi-home"></span> Home</strong></a
+        >
+        <span class="mdi mdi-chevron-right"></span>
+        <a href="{% url 'productdetail' product.id %}">Product details</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="shop-single section-padding pt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="shop-detail-left mt-1">
+          <div>
+            <img src="{{product.product_img.url}}" style="width: 100%" />
+          </div>
+
+          <!-- Next and previous buttons -->
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+      </div>
+      <div class="col-md-6 mt-4 mt-md-0">
+        <div class="shop-detail-right">
+          <span class="badge badge-success">50% OFF</span>
+          <h2>{{product.product_title}}</h2>
+          <h6>
+            <strong><span class="mdi mdi-approval"></span> Available in</strong>
+            - {{product.product_avail}} gm
+          </h6>
+          <p class="regular-price">
+            <i class="mdi mdi-tag-outline"></i> MRP : &#8377;
+            {{product.selling_price}}
+          </p>
+          <p class="offer-price mb-0">
+            Discounted price :
+            <span class="text-success"
+              >&#8377; {{product.discounted_price}}</span
+            >
+          </p>
+          {% if request.user.is_authenticated %}
+           {% if item_already_in_cart %}
+
+           <a href="{% url 'showcart' %}" class="btn btn-warning shadow px-5 py-2 ms-4">Go To Cart</a>
+
+           {% else %}
+
+
+           <form action="/add-to-cart">
+            <input
+              type="hidden"
+              name="prod_id"
+              value="{{product.id}}"
+              id="prod_id"
+            />
+            <button type="submit" class="btn btn-secondary btn-lg">
+              <i class="mdi mdi-cart-outline"></i> Add To Cart
+            </button>
+           </form>
+           {% endif %}
+          {% endif %}
+
+          {% if not request.user.is_authenticated %}
+          <form action="/add-to-cart">
+            <input
+              type="hidden"
+              name="prod_id"
+              value="{{product.id}}"
+              id="prod_id"
+            />
+            <button type="submit" class="btn btn-secondary btn-lg">
+              <i class="mdi mdi-cart-outline"></i> Add To Cart
+            </button>
+          </form>
+          {% endif %}
+
+          <div class="short-description">
+            <h5>
+              Quick Overview
+              <p class="float-right">
+                Availability: <span class="badge badge-success">In Stock</span>
+              </p>
+            </h5>
+            <p>{{product.product_desc}}</p>
+          </div>
+          <h6 class="mb-3 mt-4">Why shop from Groci?</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="feature-box">
+                <i class="mdi mdi-truck-fast"></i>
+                <h6 class="text-info">Free Delivery</h6>
+                <p>Lorem ipsum dolor...</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-box">
+                <i class="mdi mdi-basket"></i>
+                <h6 class="text-info">100% Guarantee</h6>
+                <p>Rorem Ipsum Dolor sit...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-items-slider section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h5 class="heading-design-h5">
+        Best Offers View <span class="badge badge-info">20% OFF</span>
+        <a class="float-right text-secondary" href="{% url 'shop' %}"
+          >View All</a
+        >
+      </h5>
+    </div>
+    <div class="owl-carousel owl-carousel-featured">
+      {% for b in Best_Offer %}
+      <div class="item">
+        <div class="product">
+          <a href="{% url 'productdetail' b.id %}">
+            <div class="product-header">
+              <span class="badge badge-success">50% OFF</span>
+              <img class="img-fluid" src="{{b.product_img.url}}" alt="" />
+
+              <span class="veg text-success mdi mdi-circle"></span>
+            </div>
+            <div class="product-body">
+              <h5>{{ b.product_title }}</h5>
+              <h6>
+                <strong
+                  ><span class="mdi mdi-approval"></span> Available in</strong
+                >
+                - {{ b.product_avail }} gm
+              </h6>
+            </div>
+            <div class="product-footer">
+              <p class="offer-price mb-0">
+                &#8377; {{ b.discounted_price }}
+                <i class="mdi mdi-tag-outline"></i>
+                <span class="regular-price">&#8377; {{ b.selling_price }}</span>
+              </p>
+              <button type="button" class="btn btn-secondary btn-sm">
+                <i class="mdi mdi-cart-outline"></i> Add To Cart
+              </button>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-white border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-truck-fast"></i>
+          <h6>Free & Next Day Delivery</h6>
+          <p>Lorem ipsum dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-basket"></i>
+          <h6>100% Satisfaction Guarantee</h6>
+          <p>Rorem Ipsum Dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-tag-heart"></i>
+          <h6>Great Daily Deals Discount</h6>
+          <p>Sorem Ipsum Dolor sit amet, Cons...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

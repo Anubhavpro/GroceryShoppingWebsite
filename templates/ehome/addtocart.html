@@ -1,0 +1,101 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %} My
+Cart {% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="cart-sidebar">
+        <div class="cart-sidebar-header">
+          <h5>My Cart <span class="text-success">(5 item)</span></h5>
+        </div>
+        <div class="cart-sidebar-body">
+          {% for cart in carts %}
+          <div class="cart-list-product">
+            <a class="float-right remove-cart" href="#"></a>
+            <img
+              class="img-fluid"
+              src="{{cart.product.product_img.url}}"
+              alt=""
+            />
+            <span class="badge badge-success">50% OFF</span>
+            <h5>{{cart.product.product_title}}</h5>
+            <a
+              href="#"
+              class="btn btn-sm btn-secondary mr-3 remove-cart"
+              pid="{{cart.product.id}}"
+              >Remove item
+            </a>
+            <h6>
+              <strong
+                ><span class="mdi mdi-approval"></span> Available in</strong
+              >
+              - {{cart.product.product_avail}} gm
+            </h6>
+            <p class="offer-price mb-0">
+              &#8377; {{cart.product.discounted_price}}
+              <i class="mdi mdi-tag-outline"></i>
+              <span class="regular-price">
+                &#8377; {{cart.product.selling_price}}</span
+              >
+            </p>
+            <div class="quantity-box">
+              <div class="my-3">
+                <label for="quantity">Quantity:</label>
+                <a class="minus-cart btnn" pid="{{cart.product.id}}"
+                  ><i class="fas fa-minus-square fa-lg">-</i></a
+                >
+                <span id="quantity" style="font-size: 20px; padding: 10px"
+                  >{{cart.quantity}}</span
+                >
+                <a class="plus-cart btnn" pid="{{cart.product.id}}"
+                  ><i class="fas fa-plus-square fa-lg">+</i></a
+                >
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="cart-sidebar-footer">
+        <div class="cart-store-details">
+          <p>
+            Sub Total
+            <strong class="float-right"
+              >&#8377; <span id="amount">{{amount}}</span>
+            </strong>
+          </p>
+          <p>
+            Delivery Charges
+            <strong class="float-right text-danger">+ &#8377; 80</strong>
+          </p>
+          <h6>
+            Your total Amount
+            <strong class="float-right text-danger"
+              >&#8377; <strong id="totalamount">{{totalamount}}</strong>
+            </strong>
+          </h6>
+        </div>
+      </div>
+      <div class="mt-3">
+        <a href="{% url 'checkout' %}"
+          ><button
+            class="btn btn-secondary btn-lg btn-block text-left py-3 proceed-btn"
+            type="button"
+          >
+            <span class=""
+              ><i class="mdi mdi-cart-outline"></i> Proceed to Checkout
+            </span>
+            <span class="mdi mdi-chevron-right"></span></button
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

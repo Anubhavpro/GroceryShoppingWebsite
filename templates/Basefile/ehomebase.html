@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Askbootstrap" />
+    <meta name="author" content="Askbootstrap" />
+    {% block metadescription %}
+    <meta name="tittle" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    {% endblock %}
+
+    <link
+      href="/static/ehome/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="/static/ehome/vendor/icons/css/materialdesignicons.min.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="/static/ehome/vendor/select2/css/select2-bootstrap.css" />
+    <link
+      href="/static/ehome/vendor/select2/css/select2.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="/static/ehome/css/osahan.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="/static/ehome/vendor/owl-carousel/owl.carousel.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/ehome/vendor/owl-carousel/owl.theme.css"
+    />
+    <title>{% block title %} {% endblock title %}</title>
+  </head>
+  <body>
+    <!--====== Header Start ======-->
+
+    <div class="navbar-top pt-2 pb-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <a href="#" class="mb-0 text-white">
+              20% cashback for all users | Code:
+              <strong
+                ><span class="text-light"
+                  >OGOFERS13 <span class="mdi mdi-tag-faces"></span
+                ></span>
+              </strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav
+      class="navbar navbar-light navbar-expand-lg bg-dark bg-faded osahan-menu"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <!-- <img src="img/logo.png" alt="logo" /> -->
+          <h3>Grocery</h3>
+        </a>
+        <button
+          class="navbar-toggler navbar-toggler-white"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navbarNavDropdown ">
+          <div
+            class="navbar-nav mr-auto mt-5 mt-lg-2 margin-auto top-categories-search-main"
+          >
+            <div class="top-categories-search">
+              <div class="input-group">
+                <span class="input-group-btn categories-dropdown">
+                  <select class="form-control-select form-control">
+                    <option selected="selected">Your City</option>
+                    <option value="0">New Delhi</option>
+                    <option value="5">Noida</option>
+                    <option value="5">Grugram</option>
+                    <option value="5">Faridabad</option>
+                  </select>
+                </span>
+                <input
+                  class="form-control"
+                  placeholder="Search products in Your City"
+                  aria-label="Search products in Your City"
+                  type="text"
+                />
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">
+                    <i class="mdi mdi-file-find"></i> Search
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <nav
+      class="navbar navbar-expand-lg navbar-light osahan-menu-2 pad-none-mobile"
+    >
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link shop" href="/"
+                ><span class="mdi mdi-store"></span> Super Store</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown mx-2">
+              <a
+                class="nav-link dropdown-toggle text-white text-capitalize"
+                href="#"
+                id="profileDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{request.user}}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li>
+                  <a class="dropdown-item" href="{% url 'profile' %}"
+                    >Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'orderlist' %}"
+                    >Orders</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'passwordchange' %}"
+                    >Change Password</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="{% url 'showcart' %}" class="nav-link text-white"
+                ><span class="badge bg-danger">4</span> Cart
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item mx-2">
+              <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a
+                href="{% url 'customerregistartion' %}"
+                class="nav-link text-white"
+                >Registration</a
+              >
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Blog Page
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'blog' %}"
+                  ><i class="mdi mdi-chevron-right" aria-hidden="true"></i>
+                  Blog</a
+                >
+                <a class="dropdown-item" href="{% url 'blogdetail' %}"
+                  ><i class="mdi mdi-chevron-right" aria-hidden="true"></i> Blog
+                  Detail</a
+                >
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--====== Header Ends ======-->
+    {% block bannerslider %} {% endblock bannerslider %} {% block livesale %}
+    {%endblock livesale %} {% block body %} {% endblock %}
+
+    <!-- footer section -->
+
+    <section class="footer section-padding py-5">
+      <div class="container">
+        <div class="row py-lg-4">
+          <div class="col-xl-2 col-sm-6">
+            <div class="footer-brand">
+              <!-- <img class="img-fluid" src="img/logo.png" /> -->
+              <h3>Grocery</h3>
+            </div>
+          </div>
+          <div class="col-xl-2 col-sm-6">
+            <h6 class="mb-4">PRODUCTS</h6>
+            <ul>
+              <li><a href="/">Super Store</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'blogdetail' %}">Blog Details</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-2 col-sm-6">
+            <h6 class="mb-4">Accounts</h6>
+            <ul>
+              <li><a href="{% url 'profile' %}">My Profile</a></li>
+              <li><a href="{% url 'wishlist' %}">Wish List</a></li>
+              <li><a href="{% url 'orderlist' %}">Order List</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-2 col-sm-6">
+            <h6 class="mb-4">CONNECT</h6>
+            <ul>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="{% url 'address' %}">My Address</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-4 col-sm-6">
+            <h6 class="mb-4">Subscribe to our Newsletter</h6>
+            <form
+              class="form-inline newsletter-form mb-1"
+              action="{% url 'footsubscribe' %}"
+              method="post"
+            >
+              {% csrf_token %}
+              <input
+                type="email"
+                class="form-control mr-sm-2"
+                placeholder="Enter your email"
+                name="email"
+                required
+              />
+              <button type="submit" class="btn btn-secondary subs-btn">
+                Subscribe
+              </button>
+            </form>
+            <small
+              ><a href="#"
+                >Register now to get updates on
+                <span class="text-info">Offers and products</span></a
+              ></small
+            >
+            <div class="app mt-4 pt-2">
+              <h6 class="mb-4">DOWNLOAD APP</h6>
+              <a href="#">
+                <img class="img-fluid" src="/static/ehome/img/google.png" />
+              </a>
+              <a href="#">
+                <img class="img-fluid" src="/static/ehome/img/apple.png" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pt-4 pb-4 footer-bottom">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-6 col-sm-6">
+            <p class="mt-1 mb-0">
+              &copy; Copyright 2022
+              <strong class="text-dark">Bhartiya Tech</strong>. All Rights
+              Reserved<br />
+              <small class="mt-0 mb-0"
+                >Designed By
+                <a
+                  href="https://www.bhartiyatech.com/"
+                  target="_blank"
+                  class="text-primary"
+                >
+                  Bhartiya Tech IT Solutions Ⓙ</a
+                >
+              </small>
+            </p>
+          </div>
+          <div class="col-lg-6 col-sm-6 text-right">
+            <img
+              alt="osahan logo"
+              src="/static/ehome/img/payment_methods.png"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="/static/ehome/vendor/jquery/jquery.min.js"
+      type="7a22cbb83c80eaa44e7526b6-text/javascript"
+    ></script>
+    <script
+      src="/static/ehome/vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="7a22cbb83c80eaa44e7526b6-text/javascript"
+    ></script>
+
+    <script
+      src="/static/ehome/vendor/select2/js/select2.min.js"
+      type="7a22cbb83c80eaa44e7526b6-text/javascript"
+    ></script>
+
+    <script
+      src="/static/ehome/vendor/owl-carousel/owl.carousel.js"
+      type="7a22cbb83c80eaa44e7526b6-text/javascript"
+    ></script>
+
+    <script
+      src="/static/ehome/js/custom.js"
+      type="7a22cbb83c80eaa44e7526b6-text/javascript"
+    ></script>
+    <script
+      src="/static/ehome/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+      data-cf-settings="7a22cbb83c80eaa44e7526b6-|49"
+      defer=""
+    ></script>
+  </body>
+</html>

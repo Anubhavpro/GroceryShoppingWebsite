@@ -1,0 +1,101 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %} Shop
+{% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+
+<section class="pt-3 pb-3 page-info section-padding border-bottom bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="#"
+          ><strong><span class="mdi mdi-home"></span> Home</strong></a
+        >
+        <span class="mdi mdi-chevron-right"></span> <a href="#">Shop</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container-fluid my-5">
+  <div class="row">
+   <div class="col-sm-3">
+    <div class="list-group">
+     <a href="{% url 'shop' %}" class="list-group-item list-group-item-action" aria-current="true">All Grocery Item</a>
+     <a href="{% url 'fruitdata' 'Fruits' %}" class="list-group-item list-group-item-action" aria-current="true">Fruits</a>
+     <a href="{% url 'fruitdata' 'Vegetables' %}" class="list-group-item list-group-item-action" aria-current="true">Vegetables</a>
+     <a href="{% url 'fruitdata' 'below' %}" class="list-group-item list-group-item-action" aria-current="true">Below 100</a>
+     <a href="{% url 'fruitdata' 'above' %}" class="list-group-item list-group-item-action" aria-current="true">Above 100</a>
+    </div>
+   </div>
+   <div class="col-sm-9">
+      <div class="owl-carousel owl-carousel-featured">
+        {% for product in Fruits_Vegetables %}
+        <div class="item">
+          <div class="product">
+            <a href="{% url 'productdetail' product.id %}">
+              <div class="product-header">
+                <span class="badge badge-success">50% OFF</span>
+                <img class="img-fluid" src="{{product.product_img.url}}" alt="" />
+  
+                <span class="veg text-success mdi mdi-circle"></span>
+              </div>
+              <div class="product-body">
+                <h5>{{ product.product_title }}</h5>
+                <h6>
+                  <strong
+                    ><span class="mdi mdi-approval"></span> Available in</strong
+                  >
+                  - {{ product.product_avail }} gm
+                </h6>
+              </div>
+              <div class="product-footer">
+                <p class="offer-price mb-0">
+                  &#8377; {{ product.discounted_price }}
+                  <i class="mdi mdi-tag-outline"></i>
+                  <span class="regular-price">&#8377; {{ product.selling_price }}</span>
+                </p>
+                <button type="button" class="btn btn-secondary btn-sm">
+                  <i class="mdi mdi-cart-outline"></i> Add To Cart
+                </button>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+     </div>
+   </div>
+   </div>
+  </div>
+ </div>
+
+
+<section class="section-padding bg-white border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-truck-fast"></i>
+          <h6>Free & Next Day Delivery</h6>
+          <p>Lorem ipsum dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-basket"></i>
+          <h6>100% Satisfaction Guarantee</h6>
+          <p>Rorem Ipsum Dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-tag-heart"></i>
+          <h6>Great Daily Deals Discount</h6>
+          <p>Sorem Ipsum Dolor sit amet, Cons...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

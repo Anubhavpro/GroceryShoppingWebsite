@@ -1,0 +1,19 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %}
+Empty Cart {% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+<div class="container my-5">
+  <div class="row">
+    <h3 class="text-center">You have no Product in Your Cart</h3>
+    <div class="text-center">
+      <img
+        src="/static/ehome/img/emptycart.png"
+        alt=""
+        class="img-fluid img-thumbnail w-25"
+      />
+    </div>
+  </div>
+</div>
+{% endblock %}

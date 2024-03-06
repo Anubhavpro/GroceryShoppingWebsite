@@ -1,0 +1,115 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %}
+Profile {% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+<section class="account-page section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 mx-auto">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <div class="card account-left">
+              <div class="user-profile-header">
+                <img alt="logo" src="/static/ehome/img/user.jpg" />
+                <h5 class="mb-1 text-secondary text-capitalize">
+                  <strong>Hi </strong> {{request.user}}
+                </h5>
+              </div>
+              <div class="list-group">
+                <a
+                  href="{% url 'profile' %}"
+                  class="list-group-item list-group-tem-action active"
+                  ><i aria-hidden="true" class="mdi mdi-account-outline"></i> My
+                  Profile</a
+                >
+                <a
+                  href="{% url 'address' %}"
+                  class="list-group-item list-group-item-action"
+                  ><i aria-hidden="true" class="mdi mdi-map-marker-circle"></i>
+                  My Address</a
+                >
+                <a
+                  href="{% url 'wishlist' %}"
+                  class="list-group-item list-group-item-action"
+                  ><i aria-hidden="true" class="mdi mdi-heart-outline"></i> Wish
+                  List
+                </a>
+                <a
+                  href="{% url 'logout' %}"
+                  class="list-group-item list-group-item-action"
+                  ><i aria-hidden="true" class="mdi mdi-lock"></i> Logout</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card card-body account-right">
+              <div class="widget">
+                <div class="section-header">
+                  <h5 class="heading-design-h5">My Profile</h5>
+                </div>
+                <form action="" method="post" novalidate>
+                  {% csrf_token %} {% for fm in form %}
+                  <div class="form-group col-lg-6 mb-3">
+                    {{fm.label_tag}} {{fm}}
+                    <small class="text-danger">{{fm.errors|striptags}}</small>
+                  </div>
+                  {% endfor %}
+                  <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+                {% if messages %} {% for message in messages %}
+                <p
+                  {%
+                  if
+                  message.tags
+                  %}
+                  class="alert alert-{{message.tags}} mb-7"
+                  {%
+                  endif
+                  %}
+                >
+                  {{message}}
+                </p>
+                {% endfor %} {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-white border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-truck-fast"></i>
+          <h6>Free & Next Day Delivery</h6>
+          <p>Lorem ipsum dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-basket"></i>
+          <h6>100% Satisfaction Guarantee</h6>
+          <p>Rorem Ipsum Dolor sit amet, cons...</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="feature-box">
+          <i class="mdi mdi-tag-heart"></i>
+          <h6>Great Daily Deals Discount</h6>
+          <p>Sorem Ipsum Dolor sit amet, Cons...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

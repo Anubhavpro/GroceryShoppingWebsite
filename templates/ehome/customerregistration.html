@@ -1,0 +1,60 @@
+{% extends 'Basefile/ehomebase.html' %} {% load static %} {% block title %}
+Registration {% endblock %} {%block metadescription %}
+<meta name="tittle" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+{% endblock %} {% block body %}
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <form action="" method="post">
+        <div class="login-modal-right">
+          <div class="tab-content">
+            <div class="tab-pane active" id="login" role="tabpanel">
+              <h3 class="heading-design-h5" style="font-size: 30px">
+                Customer Registration!
+              </h3>
+              {% if messages %} 
+         {% for message in messages %}
+           <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+         {% endfor %}
+         {% endif %}  
+              {% csrf_token %} 
+              {% for fm in form %}
+              <div class="form-group mb-3">
+                {{fm.label_tag}} {{fm}}
+                <small class="text-danger">{{fm.errors | striptags}}</small>
+              </div>
+              {% endfor %}
+              </div>
+              <input type="submit" value="submit" class="btn btn-primary">
+            </div>
+            <div class="text-center text-primary fw-bold"><small>Existing User ? 
+              <a href="#" class="text-danger">Log In Now</a></small>
+            </div>
+            {% if form.non_field_errors %}
+           {% for error in form.non_field_errors %}
+             <p class="alert alert-danger my-3">{{error}}</p>
+           {% endfor %}
+          {% endif %}
+          </div>
+          <div class="text-center login-footer-tab">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#register" role="tab"
+                  ><i class="mdi mdi-pencil"></i> REGISTER</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </form>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+
+
+{% endblock %}
